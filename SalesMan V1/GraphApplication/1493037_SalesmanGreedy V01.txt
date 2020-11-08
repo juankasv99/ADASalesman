@@ -1,0 +1,134 @@
+INFORME DE CORRECCION SalesmanGreedy
+================================================================================
+
+Fecha: 06/11/2020
+Hora: 13:11:18
+Ejecutable: x64\Release\GraphApplication.exe
+
+ALUMNO: 1493037 SORIANO VALLE, Juan Carlos JuanCarlos.Soriano@e-campus.uab.cat
+
+================================================================================
+PRUEBA FALLA: Simple::SalesmanGreedy TIEMPO: 0.000000s. (0.000003s.)
+--------------------------------------------------------------------------------
+TRACK OK      : [V0001 -(E0005)->V0002]
+TRACK PRACTICA: []
+V0001:-1 V0002:-1 V0003:-1 V0004:-1 
+El track está vacio
+
+================================================================================
+PRUEBA FALLA: GreedyNoOptimo::SalesmanGreedy TIEMPO: 0.000006s. (0.000007s.)
+--------------------------------------------------------------------------------
+TRACK OK      : [V0001 -(E0019)->V0002 -(E0021)->V0003 -(E0021$Reverse)->V0002 -(E0019$Reverse)->V0001 -(E0017)->V0006 -(E0027)->V0004 -(E0013)->V0009 -(E0015)->V0005]
+TRACK PRACTICA: [V0001 -(E0019)->V0002 -(E0021)->V0001 -(E0017)->V0003 -(E0021$Reverse)->V0002 -(E0019$Reverse)->V0001]
+V0001:-1 V0002:-1 V0003:-1 V0004:-1 V0005:-1 V0006:-1 V0007:-1 V0008:-1 V0009:-1 V0010:-1 
+El track no acaba en el último vértice de Visits
+El track no contiene el vértice de Visits(711, 177)
+Camino cortado de V0003 a V0001
+Camino cortado de V0006 a V0003
+
+================================================================================
+PRUEBA FALLA: Graf10_20_3::SalesmanGreedy TIEMPO: 0.000003s. (0.000004s.)
+--------------------------------------------------------------------------------
+TRACK OK      : [V0008 -(E0025$Reverse)->V0007 -(E0011$Reverse)->V0004 -(E0005$Reverse)->V0003 -(E0033)->V0006]
+TRACK PRACTICA: [V0007 -(E0011$Reverse)->V0008 -(E0025$Reverse)->V0007]
+V0001:-1 V0002:-1 V0003:-1 V0004:-1 V0005:-1 V0006:-1 V0007:-1 V0008:-1 V0009:-1 V0010:-1 
+El track no empieza por el primer vértice de Visits
+El track no acaba en el último vértice de Visits
+El track no contiene el vértice de Visits(13331.9, 13176.7)
+Camino cortado de V0004 a V0008
+
+================================================================================
+PRUEBA FALLA: Graf10_20_5::SalesmanGreedy TIEMPO: 0.000007s. (0.000010s.)
+--------------------------------------------------------------------------------
+TRACK OK      : [V0007 -(E0037$Reverse)->V0008 -(E0013$Reverse)->V0006 -(E0031$Reverse)->V0003 -(E0021$Reverse)->V0005 -(E0007$Reverse)->V0001 -(E0001)->V0002]
+TRACK PRACTICA: [V0007 -(E0037$Reverse)->V0008 -(E0013$Reverse)->V0003 -(E0021$Reverse)->V0006 -(E0031$Reverse)->V0003]
+V0001:-1 V0002:-1 V0003:-1 V0004:-1 V0005:-1 V0006:-1 V0007:-1 V0008:-1 V0009:-1 V0010:-1 
+El track no acaba en el último vértice de Visits
+El track no contiene el vértice de Visits(11081.9, 6633.01)
+Camino cortado de V0006 a V0003
+Camino cortado de V0005 a V0006
+
+================================================================================
+PRUEBA FALLA: Graf10_20_6::SalesmanGreedy TIEMPO: 0.000014s. (0.000011s.)
+--------------------------------------------------------------------------------
+TRACK OK      : [V0002 -(E0001$Reverse)->V0001 -(E0003)->V0003 -(E0023$Reverse)->V0004 -(E0033)->V0005 -(E0035$Reverse)->V0010 -(E0017$Reverse)->V0008 -(E0027)->V0009 -(E0039$Reverse)->V0007]
+TRACK PRACTICA: [V0002 -(E0001$Reverse)->V0001 -(E0003)->V0003 -(E0023$Reverse)->V0010 -(E0017$Reverse)->V0004 -(E0033)->V0005 -(E0035$Reverse)->V0010]
+V0001:-1 V0002:-1 V0003:-1 V0004:-1 V0005:-1 V0006:-1 V0007:-1 V0008:-1 V0009:-1 V0010:-1 
+El track no acaba en el último vértice de Visits
+El track no contiene el vértice de Visits(13959.4, 5230.63)
+Camino cortado de V0004 a V0010
+Camino cortado de V0008 a V0004
+
+================================================================================
+PRUEBA FALLA: Graf10_40_4::SalesmanGreedy TIEMPO: 0.000006s. (0.000008s.)
+--------------------------------------------------------------------------------
+TRACK OK      : [V0003 -(E0003$Reverse)->V0002 -(E0033$Reverse)->V0008 -(E0013$Reverse)->V0007 -(E0011$Reverse)->V0006 -(E0039$Reverse)->V0001]
+TRACK PRACTICA: [V0002 -(E0033$Reverse)->V0003 -(E0003$Reverse)->V0007 -(E0011$Reverse)->V0008 -(E0013$Reverse)->V0007]
+V0001:-1 V0002:-1 V0003:-1 V0004:-1 V0005:-1 V0006:-1 V0007:-1 V0008:-1 V0009:-1 V0010:-1 
+El track no empieza por el primer vértice de Visits
+El track no acaba en el último vértice de Visits
+El track no contiene el vértice de Visits(14197.7, 2450.76)
+Camino cortado de V0008 a V0003
+Camino cortado de V0002 a V0007
+Camino cortado de V0006 a V0008
+
+================================================================================
+PRUEBA FALLA: graf20_100_4::SalesmanGreedy TIEMPO: 0.000010s. (0.000014s.)
+--------------------------------------------------------------------------------
+TRACK OK      : [V0018 -(E0103$Reverse)->V0007 -(E0015)->V0009 -(E0173$Reverse)->V0017 -(E0087)->V0002 -(E0009)->V0006]
+TRACK PRACTICA: [V0007 -(E0015)->V0018 -(E0103$Reverse)->V0009 -(E0173$Reverse)->V0017]
+V0001:-1 V0002:-1 V0003:-1 V0004:-1 V0005:-1 V0006:-1 V0007:-1 V0008:-1 V0009:-1 V0010:-1 V0011:-1 V0012:-1 V0013:-1 V0014:-1 V0015:-1 V0016:-1 V0017:-1 V0018:-1 V0019:-1 V0020:-1 
+El track no empieza por el primer vértice de Visits
+El track no acaba en el último vértice de Visits
+El track no contiene el vértice de Visits(1798.88, 2151.43)
+Camino cortado de V0009 a V0018
+Camino cortado de V0007 a V0009
+
+================================================================================
+PRUEBA FALLA: graf30_300_8::SalesmanGreedy TIEMPO: 0.000052s. (0.000110s.)
+--------------------------------------------------------------------------------
+TRACK OK      : [V0012 -(E0021$Reverse)->V0009 -(E0401$Reverse)->V0015 -(E0233$Reverse)->V0022 -(E0519)->V0011 -(E0313)->V0020 -(E0145)->V0006 -(E0437$Reverse)->V0024 -(E0349)->V0008 -(E0127$Reverse)->V0021]
+TRACK PRACTICA: [V0012 -(E0021$Reverse)->V0009 -(E0401$Reverse)->V0015 -(E0233$Reverse)->V0011 -(E0313)->V0022 -(E0519)->V0020 -(E0145)->V0024 -(E0349)->V0006 -(E0437$Reverse)->V0024]
+V0001:-1 V0002:-1 V0003:-1 V0004:-1 V0005:-1 V0006:-1 V0007:-1 V0008:-1 V0009:-1 V0010:-1 V0011:-1 V0012:-1 V0013:-1 V0014:-1 V0015:-1 V0016:-1 V0017:-1 V0018:-1 V0019:-1 V0020:-1 V0021:-1 V0022:-1 V0023:-1 V0024:-1 V0025:-1 V0026:-1 V0027:-1 V0028:-1 V0029:-1 V0030:-1 
+El track no acaba en el último vértice de Visits
+El track no contiene el vértice de Visits(14933.6, 47.3647)
+Camino cortado de V0022 a V0011
+Camino cortado de V0020 a V0022
+Camino cortado de V0011 a V0020
+Camino cortado de V0006 a V0024
+Camino cortado de V0008 a V0006
+
+================================================================================
+PRUEBA FALLA: Graf50_200_6::SalesmanGreedy TIEMPO: 0.000018s. (0.000023s.)
+--------------------------------------------------------------------------------
+TRACK OK      : [V0010 -(E0111)->V0012 -(E0113)->V0014 -(E0045$Reverse)->V0019 -(E0135)->V0007 -(E0011$Reverse)->V0003 -(E0007)->V0005 -(E0077)->V0012]
+TRACK PRACTICA: [V0012 -(E0113)->V0010 -(E0111)->V0014 -(E0045$Reverse)->V0007 -(E0011$Reverse)->V0019 -(E0135)->V0003 -(E0007)->V0005]
+V0001:-1 V0002:-1 V0003:-1 V0004:-1 V0005:-1 V0006:-1 V0007:-1 V0008:-1 V0009:-1 V0010:-1 V0011:-1 V0012:-1 V0013:-1 V0014:-1 V0015:-1 V0016:-1 V0017:-1 V0018:-1 V0019:-1 V0020:-1 
+El track no empieza por el primer vértice de Visits
+El track no acaba en el último vértice de Visits
+Camino cortado de V0014 a V0010
+Camino cortado de V0012 a V0014
+Camino cortado de V0019 a V0007
+Camino cortado de V0003 a V0019
+Camino cortado de V0007 a V0003
+
+================================================================================
+PRUEBA FALLA: Graf50_200_7C::SalesmanGreedy TIEMPO: 0.000013s. (0.000041s.)
+--------------------------------------------------------------------------------
+TRACK OK      : [V0001 -(E0017)->V0010 -(E0017$Reverse)->V0001 -(E0001)->V0002 -(E0021$Reverse)->V0009 -(E0015$Reverse)->V0004 -(E0011)->V0007 -(E0029)->V0002 -(E0003)->V0003 -(E0003$Reverse)->V0002 -(E0001$Reverse)->V0001]
+TRACK PRACTICA: [V0001 -(E0017)->V0001 -(E0001)->V0010 -(E0017$Reverse)->V0002 -(E0021$Reverse)->V0009 -(E0015$Reverse)->V0004 -(E0011)->V0002 -(E0003)->V0007 -(E0029)->V0002]
+V0001:-1 V0002:-1 V0003:-1 V0004:-1 V0005:-1 V0006:-1 V0007:-1 V0008:-1 V0009:-1 V0010:-1 
+El track no acaba en el último vértice de Visits
+Camino cortado de V0010 a V0001
+Camino cortado de V0002 a V0010
+Camino cortado de V0001 a V0002
+Camino cortado de V0007 a V0002
+Camino cortado de V0003 a V0007
+
+================================================================================
+RESUMEN ========================================================================
+================================================================================
+PRUEBAS OK (0): 
+PRUEBAS NOK(10): Simple::SalesmanGreedy, GreedyNoOptimo::SalesmanGreedy, Graf10_20_3::SalesmanGreedy, Graf10_20_5::SalesmanGreedy, Graf10_20_6::SalesmanGreedy, Graf10_40_4::SalesmanGreedy, graf20_100_4::SalesmanGreedy, graf30_300_8::SalesmanGreedy, Graf50_200_6::SalesmanGreedy, Graf50_200_7C::SalesmanGreedy
+TIEMPO: 0.000924.s (0.000231s.)
+NOTA: 0.000000

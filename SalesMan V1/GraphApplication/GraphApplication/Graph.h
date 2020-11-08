@@ -293,7 +293,7 @@ public:
 	// Atributos de Dijkstra
 	double m_DijkstraDistance;
 	bool m_DijkstraVisit;
-	CVertex* m_DijkstraPrev;
+	CEdge* m_DijkstraPrev;
 
 	// Métodes
 	CEdge* FindEdge(const char* name);

@@ -13,6 +13,7 @@ void Dijkstra(CGraph& graph, CVertex* pStart)
 	for (CVertex& v : graph.m_Vertices) {
 		v.m_DijkstraDistance = DBL_MAX;
 		v.m_DijkstraVisit = false;
+		v.m_DijkstraPrev = NULL;
 	}
 	pStart->m_DijkstraDistance = 0;
 	
@@ -35,7 +36,7 @@ void Dijkstra(CGraph& graph, CVertex* pStart)
 				double preDist = vActual->m_DijkstraDistance + vActual->m_Point.Distance(neighbour->m_Point);
 				if (neighbour->m_DijkstraDistance == DBL_MAX || preDist < neighbour->m_DijkstraDistance) {
 					neighbour->m_DijkstraDistance = preDist;
-					neighbour->m_DijkstraPrev = vActual;
+					neighbour->m_DijkstraPrev = outEdge;
 				}
 			}
 		}
@@ -77,6 +78,7 @@ void DijkstraQueue(CGraph& graph, CVertex *pStart)
 	for (CVertex& v : graph.m_Vertices) {
 		v.m_DijkstraDistance = DBL_MAX;
 		v.m_DijkstraVisit = false;
+		v.m_DijkstraPrev = NULL;
 	}
 	pStart->m_DijkstraDistance = 0;
 	priority_queue<pair<pair<CVertex*, CVertex*>, double>, std::vector<pair<pair<CVertex*, CVertex*>, double>>, comparator> priorityQueue;
@@ -98,7 +100,7 @@ void DijkstraQueue(CGraph& graph, CVertex *pStart)
 				double preDist = vActual->m_DijkstraDistance + vActual->m_Point.Distance(neighbour->m_Point);
 				if (neighbour->m_DijkstraDistance == DBL_MAX || preDist < neighbour->m_DijkstraDistance) {
 					neighbour->m_DijkstraDistance = preDist;
-					neighbour->m_DijkstraPrev = vActual;
+					neighbour->m_DijkstraPrev = outEdge;
 					priorityQueue.push(make_pair(make_pair(vActual, neighbour), preDist));
 				}
 			}
