@@ -8,7 +8,6 @@ private:
 	CVertex* vPtr;
 	int pathID;
 	CEdge* edgePath;
-	//pair<CNode*, CEdge*> connection;
 public:
 	CNode(CVertex* vertex, int pathNum) { vPtr = vertex; pathID = pathNum; }
 	CVertex* getVertexPtr() { return vPtr; }
@@ -26,19 +25,12 @@ int getBelongingPath(CVertex* v, list<CNode*>* stackTrack) {
 			return (*it)->getPathID();
 		}
 	}
+
+	
 	return -1;
 }
 
-void getNeighs(CVertex* v) {
-	for (CEdge* e : v->m_Edges) {
-		v->m_neighbords.push_back(e->m_pDestination);
-	}
-}
 
-/*void getNeighs(CNode* n) {
-	for (CEdge* e : n->getVertexPtr()->m_Edges) {
-	}
-}*/
 
 
 // =============================================================================
@@ -48,56 +40,10 @@ void getNeighs(CVertex* v) {
 void BacktrackingPure(CVisits* visitsCopy, list<CNode*>* stackTrack, CNode* actNode, CVertex* destinationVertex, CTrack* optTrack, CTrack* actTrack) {
 	
 	if (actNode->getEdgePath() != NULL) stackTrack->push_front(actNode);
-	getNeighs(actNode->getVertexPtr());
 	CNode* nextNode;
 	bool belongsVisits;
 	actTrack->Clear();
 	for (CNode* n : *stackTrack) actTrack->AddFirst(n->getEdgePath());
-	//actTrack->AppendBefore(stackTrack);
-	
-	/*if (stackTrack->size() > 1) {
-		cout << "stackTrack size=" << stackTrack->size() << endl;
-		list<CNode*>::iterator it1=stackTrack->begin();
-		list<CNode*>::iterator it2=next(stackTrack->begin(),1);
-
-		for (it1; it1 != prev(stackTrack->end()); it1++) {
-			for (CEdge* e : (*it1)->getVertexPtr()->m_Edges) {
-				if (e->m_pDestination->m_Point == (*it2)->getVertexPoint())
-				{
-					actTrack->AddFirst(e->m_pReverseEdge);
-					break;
-				}
-			}
-			it2++;
-		}
-		
-	}*/
-
-	/*if (optTrack->Length() == 0 || actTrack->Length() < optTrack->Length()) {
-		if (actNode->getVertexPoint() == destinationVertex->m_Point && visitsCopy->m_Vertices.empty()) *optTrack = *actTrack;
-		for (CVertex* v : actNode->getVertexPtr()->m_neighbords) {
-			if (visitsCopy->m_Vertices.empty() && v->m_Point == destinationVertex->m_Point) {
-				nextNode = new CNode(destinationVertex, actNode->getPathID());
-				BacktrackingPure(visitsCopy, stackTrack, nextNode, destinationVertex, optTrack, actTrack);
-			}
-			else if (!visitsCopy->m_Vertices.empty() || v->m_Point != destinationVertex->m_Point) {
-				if (getBelongingPath(v, stackTrack) != actNode->getPathID()) {
-					nextNode = new CNode(v, actNode->getPathID());
-					belongsVisits = visitsCopy->MemberP(nextNode->getVertexPtr());
-
-					if (belongsVisits) {
-						nextNode->setPathID(nextNode->getPathID() + 1);
-						visitsCopy->m_Vertices.remove(nextNode->getVertexPtr());
-					}
-					BacktrackingPure(visitsCopy, stackTrack, nextNode, destinationVertex, optTrack, actTrack);
-					if (belongsVisits) {
-						nextNode->setPathID(actNode->getPathID());
-						visitsCopy->Add(nextNode->getVertexPtr());
-					}
-				}
-			}
-		}
-	}*/
 
 	if (optTrack->Length() == 0 || actTrack->Length() < optTrack->Length()) {
 		if (actNode->getVertexPoint() == destinationVertex->m_Point && visitsCopy->m_Vertices.empty()) *optTrack = *actTrack;
@@ -128,7 +74,6 @@ void BacktrackingPure(CVisits* visitsCopy, list<CNode*>* stackTrack, CNode* actN
 	}
 
 	if (stackTrack->size() != 0) stackTrack->pop_front();
-	else cout << "ARA" << endl;
 		
 
 	
@@ -148,13 +93,6 @@ CTrack SalesmanTrackBacktracking(CGraph &graph, CVisits &visits)
 	destinationVertex = visitsCopy.m_Vertices.back();
 	visitsCopy.m_Vertices.pop_back();
 
-	//stackTrack size = 0
-	//hay que encontrar una manera de pasar los edges en vez de los vertices
-
-	//ver los edges del nodo actual y añadirlos a los posibles candidatos
-
-	getNeighs(actNode->getVertexPtr());
-
 	BacktrackingPure(&visitsCopy, stackTrack, actNode, destinationVertex, optTrack, actTrack);
 
 	return *optTrack;
@@ -167,7 +105,82 @@ CTrack SalesmanTrackBacktracking(CGraph &graph, CVisits &visits)
 // =============================================================================
 
 
+void BacktrackingGreedy(vector<vector<double>>& visitsTracksLenghtMat, vector<bool>* inStackVec, int actVertex, vector<int>* stackTrack, vector<int>* optTrack, int nVertexToVisit, double* optDist, double* actDist) {
+	stackTrack->push_back(actVertex);
+	(*inStackVec)[actVertex] = true;
+	if (stackTrack->size() == nVertexToVisit && stackTrack->back() == nVertexToVisit - 1) {
+		if (*actDist < *optDist) {
+			*optTrack = *stackTrack;
+			*optDist = *actDist;
+		}
+	}
+	else {
+		for (int nextVertex = 0; nextVertex < nVertexToVisit; nextVertex++) {
+			if (!(*inStackVec)[nextVertex]) {
+				*actDist += visitsTracksLenghtMat[actVertex][nextVertex];
+				BacktrackingGreedy(visitsTracksLenghtMat, inStackVec, nextVertex, stackTrack, optTrack, nVertexToVisit, optDist, actDist);
+			}
+		}
+	}
+	int popVertex = stackTrack->back();
+	stackTrack->pop_back();
+	(*inStackVec)[popVertex] = false;
+	if (stackTrack->size() > 0) *actDist -= visitsTracksLenghtMat[popVertex][stackTrack->back()]; else *actDist = 0;
+	return;
+
+}
+
+
 CTrack SalesmanTrackBacktrackingGreedy(CGraph& graph, CVisits& visits)
 {
-	return CTrack(&graph);
+	vector<vector<CTrack*>> visitsTracksMat(visits.GetNVertices(), vector<CTrack*>(visits.GetNVertices(), 0));
+	vector<vector<double>> visitsTracksLengthMat(visits.GetNVertices(), vector<double>(visits.GetNVertices(), 0));
+	int nVertexToVisit = visits.m_Vertices.size();
+
+	int i = 0;
+	int j = 0;
+	for (CVertex* iVertex : visits.m_Vertices) {
+		DijkstraQueue(graph, iVertex);
+		j = 0;
+		for (CVertex* jVertex : visits.m_Vertices) {
+			CTrack* aux = new CTrack(&graph);
+			CVertex* actV = jVertex;
+			while (actV != iVertex) {
+				aux->AddFirst(actV->m_DijkstraPrev);
+				actV = actV->m_DijkstraPrev->m_pOrigin;
+			}
+			if (iVertex != jVertex) {
+				//aux->AddFirst(iVertex->m_DijkstraPrev);
+				visitsTracksMat[i][j] = aux;
+				visitsTracksLengthMat[i][j] = aux->Length();
+			}
+			
+			j++;
+		}
+		i++;
+	}
+
+	vector<int> stackTrack;
+	vector<bool> inStackMap(nVertexToVisit, false);
+	vector<int> optimousTrack;
+	int actVertex = 0;
+	double optimousDist = std::numeric_limits<double>::max();
+	double actDist = 0;
+	BacktrackingGreedy(visitsTracksLengthMat, &inStackMap, actVertex, &stackTrack, &optimousTrack, nVertexToVisit, &optimousDist, &actDist);
+
+	CTrack resultTrack(&graph);
+	int dest = 0;
+
+	optimousTrack.erase(optimousTrack.begin());
+	//resultTrack.AddFirst(visits.m_Vertices.front());
+	for (int orig : optimousTrack) {
+		CTrack* t = visitsTracksMat[dest][orig];
+		//t->m_Edges.pop_front();
+		resultTrack.Append(*t);
+		dest = orig;
+	}
+
+	return resultTrack;
+
+	//return CTrack(&graph);
 }
