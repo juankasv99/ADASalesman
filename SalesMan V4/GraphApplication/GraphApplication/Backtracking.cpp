@@ -45,17 +45,19 @@ void BacktrackingPure(CVisits* visitsCopy, list<CNode*>* stackTrack, CNode* actN
 	actTrack->Clear();
 	for (CNode* n : *stackTrack) actTrack->AddFirst(n->getEdgePath());
 
+	int actNodePathID = actNode->getPathID();
+
 	if (optTrack->Length() == 0 || actTrack->Length() < optTrack->Length()) {
 		if (actNode->getVertexPoint() == destinationVertex->m_Point && visitsCopy->m_Vertices.empty()) *optTrack = *actTrack;
 		for (CEdge* e : actNode->getVertexPtr()->m_Edges) {
 			if (visitsCopy->m_Vertices.empty() && e->m_pDestination->m_Point == destinationVertex->m_Point) {
-				nextNode = new CNode(destinationVertex, actNode->getPathID());
+				nextNode = new CNode(destinationVertex, actNodePathID);
 				nextNode->setEdgePath(e);
 				BacktrackingPure(visitsCopy, stackTrack, nextNode, destinationVertex, optTrack, actTrack);
 			}
 			else if (!visitsCopy->m_Vertices.empty() || e->m_pDestination->m_Point != destinationVertex->m_Point) {
-				if (getBelongingPath(e->m_pDestination, stackTrack) != actNode->getPathID()) {
-					nextNode = new CNode(e->m_pDestination, actNode->getPathID());
+				if (getBelongingPath(e->m_pDestination, stackTrack) != actNodePathID) {
+					nextNode = new CNode(e->m_pDestination, actNodePathID);
 					nextNode->setEdgePath(e);
 					belongsVisits = visitsCopy->MemberP(nextNode->getVertexPtr());
 
@@ -65,14 +67,13 @@ void BacktrackingPure(CVisits* visitsCopy, list<CNode*>* stackTrack, CNode* actN
 					}
 					BacktrackingPure(visitsCopy, stackTrack, nextNode, destinationVertex, optTrack, actTrack);
 					if (belongsVisits) {
-						nextNode->setPathID(actNode->getPathID());
+						nextNode->setPathID(actNodePathID);
 						visitsCopy->Add(nextNode->getVertexPtr());
 					}
 				}
 			}
 		}
 	}
-
 	if (stackTrack->size() != 0) stackTrack->pop_front();
 		
 
